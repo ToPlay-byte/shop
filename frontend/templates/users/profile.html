@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Profile</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static '/css/users/profile.css' %}">
+</head>
+<body>
+    <header class="header">
+        <div class="wrapper">
+            <div class="header__inner">
+                <div class="logo">
+                    <a href="{% url 'company:Home' %}" class="logo__link">
+                        hytor
+                    </a>
+                </div>
+                <a href="{% url 'company:Home' %}" class="header__btn">Home page</a>
+            </div>
+        </div>
+    </header>
+    <main class="main">
+        <section class="profile">
+            <div class="profile__inner">
+                <form method="POST" class="form">
+                    {% csrf_token %}
+                    {%for field in form %}
+                        <label for="{{field.id_for_label}}">{{field.label}}</label>
+                        {{ field }}
+                        {% if field.errors %}
+                            {{field.errors}}
+                        {% endif %}
+                     {% endfor %}
+                    <input type="submit" class="submit" value="Save">
+                </form>
+            </div>
+        </section>
+    </main>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+
+    </script>
+</body>
+</html>

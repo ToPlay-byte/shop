@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Log in</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static '/css/users/login.css' %}">
+</head>
+<body>
+    <header class="header">
+        <div class="wrapper">
+            <div class="header__inner">
+                <div class="logo">
+                    <a href="{% url 'company:Home' %}" class="logo__link">
+                        hytor
+                    </a>
+                </div>
+                <a href="{% url 'company:Home' %}" class="header__btn">Home page</a>
+            </div>
+        </div>
+    </header>
+    <main class="main">
+        <section class="login">
+            <div class="login__inner">
+                {% if request.user.is_authenticated %}
+                    <div class="authenticated">
+                        <p class="authenticated__text">
+                            You have already authenticated. Do you want to log out?
+                        </p>
+                        <a href="{% url 'users:Log out' %}" class="authenticated__link">Log out</a>
+                    </div>
+                {% else %}
+                    {% if error %}
+                        <p class="error">{{error}}</p>
+                    {% endif %}
+                    <form method="POST" class="form">
+                        {% csrf_token %}
+                        <label class="form__label" for="{{form.email.id_for_label}}">{{form.email.label}}</label>
+                        {{form.email}}
+                        {% if form.email.errors %}
+                            {{form.email.errors}}
+                        {% endif %}
+                        <label class="form__label" for="{{form.password.id_for_label}}">{{form.password.label}}</label>
+                        {{form.password}}
+                            {% if form.password.errors %}
+                                {{form.password.errors}}
+                            {% endif %}
+                        <label for="{{form.captcha.id_for_label}}">{{form.captcha.label}:</label>
+                        {{form.captcha}}
+                        <button type="submit" class="submit">Enter</button>
+                    </form>
+                    <a href="{% url 'social:begin' 'google-oauth2' %}" class="google">Sign in with google</a>
+                    <a href="{% url 'users:Sign up' %}" class="login__link">Don`t have account? Create it</a>
+                    <a href="{% url 'users:Reset password' %}" class="login__link">Forgot password?</a>
+                {% endif %}
+            </div>
+        </section>
+    </main>
+</body>
+</html>
