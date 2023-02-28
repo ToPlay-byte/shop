@@ -3,6 +3,13 @@ from config.settings.development import *
 
 SECRET_KEY = 'django-insecure-m4k50--bf&cz$r(e6n%zr2z#*e5iw)7@qc^^wk=%o%j%kdx=zq'
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.redis.RedisCache',
+        'LOCATION': 'redis://127.0.0.1:6379',
+    }
+}
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -11,6 +18,7 @@ DATABASES = {
         'PASSWORD': 'doomdoom2002',
         'HOST': '127.0.0.1',
         'PORT': '5432',
+        'ATOMIC_REQUEST': True
     }
 }
 

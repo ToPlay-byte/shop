@@ -62,6 +62,16 @@ li {
     column-gap: 60px;
 }
 
+.header__btn {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13x;
+    font-weight: 400;
+    padding: 10px 15px;
+    border: 1px solid #750712;
+    border-radius: 5px;
+    color: #750712;
+}
+
 .logo {
     font-family: 'Roboto Condensed', sans-serif;
     font-size: 24px;

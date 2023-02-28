@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404
-from django.urls import  reverse_lazy
+from django.urls import reverse_lazy
 from .models import *
 from .forms import OrderForm
 from django.views.generic import FormView, View, TemplateView, ListView
@@ -38,7 +38,7 @@ class OrderView(FormView):
         order.last_name = form.cleaned_data['last_name']
         order.email = form.cleaned_data['email']
         order.post_code = form.cleaned_data['post_code']
-        order.city = City.objects.get(name=city)
+        order.city = City.objects.get(Q(name=form.cleaned_data['city']) & Q(country__name=form.cleaned_data))
         order.country = Country.objects.get(name=form.cleaned_data['country'])
         order.address = form.cleaned_data['address']
         order.total_price = float(data['totalPrice'])
